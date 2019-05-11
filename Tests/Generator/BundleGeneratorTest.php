@@ -21,7 +21,7 @@ class BundleGeneratorTest extends GeneratorTest
         $bundle = new Bundle('Foo\BarBundle', 'FooBarBundle', $this->tmpDir, 'yml', true);
         $this->getGenerator()->generateBundle($bundle);
 
-        $files = array(
+        $files = [
             'FooBarBundle.php',
             'Controller/DefaultController.php',
             'Resources/views/Default/index.html.twig',
@@ -30,7 +30,7 @@ class BundleGeneratorTest extends GeneratorTest
             'Resources/config/services.yml',
             'DependencyInjection/Configuration.php',
             'DependencyInjection/FooBarExtension.php',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/Foo/BarBundle/'.$file), sprintf('%s has been generated', $file));
         }
@@ -54,7 +54,7 @@ class BundleGeneratorTest extends GeneratorTest
         $bundle = new Bundle('Foo\BarBundle', 'FooBarBundle', $this->tmpDir, 'xml', true);
         $this->getGenerator()->generateBundle($bundle);
 
-        $files = array(
+        $files = [
             'FooBarBundle.php',
             'Controller/DefaultController.php',
             'Resources/views/Default/index.html.twig',
@@ -63,7 +63,7 @@ class BundleGeneratorTest extends GeneratorTest
             'Resources/config/services.xml',
             'DependencyInjection/Configuration.php',
             'DependencyInjection/FooBarExtension.php',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/Foo/BarBundle/'.$file), sprintf('%s has been generated', $file));
         }

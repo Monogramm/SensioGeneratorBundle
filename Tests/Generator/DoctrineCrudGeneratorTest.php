@@ -19,7 +19,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     {
         $this->getGenerator()->generate($this->getBundle(), 'Post', $this->getMetadata(), 'yml', '/post', true, true);
 
-        $files = array(
+        $files = [
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/config/routing/post.yml',
@@ -27,26 +27,26 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Resources/views/post/show.html.twig',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
         }
 
-        $files = array(
+        $files = [
             'Resources/config/routing/post.xml',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertFalse(file_exists($this->tmpDir.'/'.$file), sprintf('%s has not been generated', $file));
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'namespace Foo\BarBundle\Controller;',
             'public function indexAction',
             'public function showAction',
             'public function newAction',
             'public function editAction',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertContains($string, $content);
         }
@@ -56,42 +56,42 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     {
         $this->getGenerator()->generate($this->getBundle(), 'Post', $this->getMetadata(), 'xml', '/post', false, true);
 
-        $files = array(
+        $files = [
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/config/routing/post.xml',
             'Resources/views/post/index.html.twig',
             'Resources/views/post/show.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
         }
 
-        $files = array(
+        $files = [
             'Resources/config/routing/post.yml',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertFalse(file_exists($this->tmpDir.'/'.$file), sprintf('%s has not been generated', $file));
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'namespace Foo\BarBundle\Controller;',
             'public function indexAction',
             'public function showAction',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertContains($string, $content);
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'public function newAction',
             'public function editAction',
             '@Route',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertNotContains($string, $content);
         }
@@ -101,35 +101,35 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     {
         $this->getGenerator()->generate($this->getBundle(), 'Post', $this->getMetadata(), 'annotation', '/post', true, true);
 
-        $files = array(
+        $files = [
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/views/post/index.html.twig',
             'Resources/views/post/show.html.twig',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
         }
 
-        $files = array(
+        $files = [
             'Resources/config/routing/post.yml',
             'Resources/config/routing/post.xml',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertFalse(file_exists($this->tmpDir.'/'.$file), sprintf('%s has not been generated', $file));
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'namespace Foo\BarBundle\Controller;',
             'public function indexAction',
             'public function showAction',
             'public function newAction',
             'public function editAction',
             '@Route',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertContains($string, $content);
         }
@@ -139,44 +139,44 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     {
         $this->getGenerator()->generate($this->getBundle(), 'Post', $this->getMetadata(), 'annotation', '/post', false, true);
 
-        $files = array(
+        $files = [
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/views/post/index.html.twig',
             'Resources/views/post/show.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
         }
 
-        $files = array(
+        $files = [
             'Resources/config/routing/post.yml',
             'Resources/config/routing/post.xml',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertFalse(file_exists($this->tmpDir.'/'.$file), sprintf('%s has not been generated', $file));
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'namespace Foo\BarBundle\Controller;',
             'public function indexAction',
             'public function showAction',
             '@Route(path="/post")', // Controller level
             '@Route(path="/", name="post_index")',
             '@Route(path="/{id}", name="post_show")',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertContains($string, $content);
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/PostController.php');
-        $strings = array(
+        $strings = [
             'public function newAction',
             'public function editAction',
-        );
+        ];
         foreach ($strings as $string) {
             $this->assertNotContains($string, $content);
         }
@@ -186,20 +186,20 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     {
         $this->getGenerator()->generate($this->getBundle(), 'Blog\Post', $this->getMetadata(), 'annotation', '/blog_post', true, true);
 
-        $files = array(
+        $files = [
             'Controller/Blog/PostController.php',
             'Tests/Controller/Blog/PostControllerTest.php',
             'Resources/views/blog/post/index.html.twig',
             'Resources/views/blog/post/show.html.twig',
             'Resources/views/blog/post/new.html.twig',
             'Resources/views/blog/post/edit.html.twig',
-        );
+        ];
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
         }
 
         $content = file_get_contents($this->tmpDir.'/Controller/Blog/PostController.php');
-        $strings = array(
+        $strings = [
             'namespace Foo\BarBundle\Controller\Blog;',
             '@Route(path="/blog_post")', // Controller level
             '@Route(path="/", name="blog_post_index")',
@@ -210,7 +210,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'public function showAction(Post $post)',
             '\'post\' => $post,',
             '\'posts\' => $posts,',
-        );
+        ];
         if (method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')) {
             // Symfony >= 2.8
             $strings[] = '$form = $this->createForm(\'Foo\BarBundle\Form\Blog\PostType\', $post);';
@@ -236,26 +236,26 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
 
     public function getRoutePrefixes()
     {
-        return array(
-            array('', ''),
-            array('/', ''),
-            array('//', ''),
-            array('/{foo}', ''),
-            array('/{_foo}', ''),
-            array('/{/foo}', ''),
-            array('/{/foo/}', ''),
-            array('/{_locale}', ''),
-            array('/{_locale}/foo', 'foo'),
-            array('/{_locale}/foo/', 'foo'),
-            array('/{_locale}/foo/{_format}', 'foo'),
-            array('/{_locale}/foo/{_format}/', 'foo'),
-            array('/{_locale}/foo/{_format}/bar', 'foo_bar'),
-            array('/{_locale}/foo/{_format}/bar/', 'foo_bar'),
-            array('/{_locale}/foo/{_format}/bar//', 'foo_bar'),
-            array('/{foo}/foo/{bar}/bar', 'foo_bar'),
-            array('/{foo}/foo/{bar}/bar/', 'foo_bar'),
-            array('/{foo}/foo/{bar}/bar//', 'foo_bar'),
-        );
+        return [
+            ['', ''],
+            ['/', ''],
+            ['//', ''],
+            ['/{foo}', ''],
+            ['/{_foo}', ''],
+            ['/{/foo}', ''],
+            ['/{/foo/}', ''],
+            ['/{_locale}', ''],
+            ['/{_locale}/foo', 'foo'],
+            ['/{_locale}/foo/', 'foo'],
+            ['/{_locale}/foo/{_format}', 'foo'],
+            ['/{_locale}/foo/{_format}/', 'foo'],
+            ['/{_locale}/foo/{_format}/bar', 'foo_bar'],
+            ['/{_locale}/foo/{_format}/bar/', 'foo_bar'],
+            ['/{_locale}/foo/{_format}/bar//', 'foo_bar'],
+            ['/{foo}/foo/{bar}/bar', 'foo_bar'],
+            ['/{foo}/foo/{bar}/bar/', 'foo_bar'],
+            ['/{foo}/foo/{bar}/bar//', 'foo_bar'],
+        ];
     }
 
     protected function getGenerator()
@@ -279,8 +279,8 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
     public function getMetadata()
     {
         $metadata = $this->getMockBuilder('Doctrine\ORM\Mapping\ClassMetadataInfo')->disableOriginalConstructor()->getMock();
-        $metadata->identifier = array('id');
-        $metadata->fieldMappings = array('title' => array('type' => 'string'));
+        $metadata->identifier = ['id'];
+        $metadata->fieldMappings = ['title' => ['type' => 'string']];
 
         return $metadata;
     }
