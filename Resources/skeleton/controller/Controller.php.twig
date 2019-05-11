@@ -5,7 +5,7 @@ namespace {{ namespace }}\Controller;
 {% block use_statements %}
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 {% if 'annotation' == format.routing -%}
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 {% endif %}
 {% endblock use_statements %}
 
@@ -17,7 +17,7 @@ class {{ controller }}Controller extends Controller
 {% for action in actions %}
     {% if 'annotation' == format.routing -%}
     /**
-     * @Route("{{ action.route }}")
+     * @Route(path="{{ action.route }}")
      */
     {% endif -%}
     public function {{ action.name }}(

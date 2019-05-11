@@ -40,7 +40,7 @@ class BundleGeneratorTest extends GeneratorTest
 
         $content = file_get_contents($this->tmpDir.'/Foo/BarBundle/Controller/DefaultController.php');
         $this->assertContains('public function indexAction', $content);
-        $this->assertNotContains('@Route("/hello/{name}"', $content);
+        $this->assertNotContains('@Route(path="/hello/{name}"', $content);
 
         $content = file_get_contents($this->tmpDir.'/Foo/BarBundle/Resources/views/Default/index.html.twig');
         $this->assertContains('Hello World!', $content);
@@ -81,7 +81,7 @@ class BundleGeneratorTest extends GeneratorTest
         $this->assertFalse(file_exists($this->tmpDir.'/Foo/BarBundle/Resources/config/routing.xml'));
 
         $content = file_get_contents($this->tmpDir.'/Foo/BarBundle/Controller/DefaultController.php');
-        $this->assertContains('@Route("/")', $content);
+        $this->assertContains('@Route(path="/")', $content);
     }
 
     public function testDirIsFile()

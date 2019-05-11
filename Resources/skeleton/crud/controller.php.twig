@@ -9,8 +9,7 @@ use {{ namespace }}\Form\{{ entity }}Type;
 {% endif %}
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 {% if 'annotation' == format -%}
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 {%- endif %}
 {% if 'new' in actions or 'edit' in actions or 'delete' in actions %}
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
 {% block phpdoc_class_annotations %}
 {% if 'annotation' == format %}
- * @Route("{{ route_prefix|default('/') }}")
+ * @Route(path="{{ route_prefix|default('/') }}")
 {% endif %}
 {% endblock phpdoc_class_annotations %}
  */
